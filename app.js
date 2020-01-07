@@ -25,7 +25,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('aaa', { username: "KuroNeko" });
 });
 
