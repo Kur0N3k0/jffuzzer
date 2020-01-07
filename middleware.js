@@ -10,7 +10,5 @@ module.exports = {
             next();
         }
     },
-    sanityXss: (data) => {
-        
-    }
+    sanityXss: require('xss-escape')
 }

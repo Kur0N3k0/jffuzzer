@@ -1,22 +1,28 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser= require('body-parser');
-const { session_secret } = require('./config');
+const morgan = require('morgan');
+const fs = require('fs');
+const { session_secret, log_path } = require('./config');
+const { initialize } = require('./init');
 var DockerRouter = require("./routers/docker");
 var UserRouter = require("./routers/user");
 var MonitorRouter = require("./routers/monitor");
-const { initialize } = require('./init');
 
 initialize();
 
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(morgan("combined"));
+app.use(morgan("combined", {
+    stream: fs.createWriteStream(log_path, { flags: 'a' })
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: session_secret,
     resave: false,
-    saveUninitlaized: true
+    saveUninitialized: true
 }));
 
 app.get('/', (req, res)=>{
