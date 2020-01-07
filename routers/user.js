@@ -3,17 +3,19 @@ const crypto = require('crypto');
 const User = require('../models/user');
 const { secret } = require('../config');
 const { levelEnum } = require('../db/defines');
-const { sanityBody } = require("../middleware");
+const { sanityBody, sanityXss } = require("../middleware");
 
 const router = express.Router();
 router.use(sanityBody);
+router.use(sanityXss);
 
 router.get("/", function(req, res) {
     res.send("user nah..");
 });
 
-router.get("/info/:username", function(req, res) {
+router.get("/info/:username", sanityXss, function(req, res) {
     const username = req.params.username;
+    console.log(username);
     User.find({ username: username }, (err, result) => {
         if(result.length == 1)
             res.render("user/info", { info: result[0] });
