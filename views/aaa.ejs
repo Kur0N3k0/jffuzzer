@@ -1,9 +1,8 @@
 <html>
   <body>
-    Hi, <%= username %>
-    <form method="POST">
-        <input type="text" name="username" value="">
-        <input type="text" name="password" value="">
+    <form method="POST" action="/docker/image/create">
+        <input type="text" name="type" value="Web">
+        <input type="text" name="name" value="Test">
       <input type="submit">
     </form>
   </body>

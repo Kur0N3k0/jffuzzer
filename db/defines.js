@@ -4,7 +4,8 @@ module.exports = {
     docker_container: "DockerContainer",
 
     levelEnum: {
-        "user": 0,
-        "admin": 1
-    }
+        user: 0,
+        admin: 1
+    },
+    fuzzerEnum: ["Web", "Mem", "Network", "File"]
 };

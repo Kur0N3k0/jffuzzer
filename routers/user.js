@@ -24,6 +24,26 @@ router.get("/info/:username", sanityXss, function(req, res) {
     });
 });
 
+router.get("/signin", function(req, res) { 
+    res.render("user/signin");
+});
+
+router.post("/signin", function(req, res) {
+    sess = request.session
+    if(auth) {
+        res.redirect("/");
+        return;
+    }
+
+    User.find({ username: username }, (err, result) => {
+        if(result.length == 1) {
+            res.redirect("/");
+        }
+        else
+            res.render("user/info", { info: "nah..." });
+    });
+});
+
 router.get("/signup", function(req, res) {
     res.render("aaa", { username: "hah" });
 });
