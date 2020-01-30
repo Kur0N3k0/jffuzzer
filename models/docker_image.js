@@ -5,7 +5,6 @@ const iconSchema = require('./icon');
 const imageSchema = new mongoose.Schema({
     name: { type: String, required: true },
     fuzzer_type: { type: String, enum: defines.fuzzerEnum, default: defines.fuzzerEnum[0], required: true },
-    icon: { type: iconSchema }
 });
 
 module.exports = mongoose.model(defines.docker_image, imageSchema);

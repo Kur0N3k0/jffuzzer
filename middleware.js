@@ -31,5 +31,15 @@ module.exports = {
             data = data.replace(/\>/g, "&gt;");
             return data.replace(/\`/g, "&#96;");
         });
+    },
+    sanitySqli: (req, res, next) => {
+        sanityBase(req, res, next, (data) => {
+            
+        });
+    },
+    is_signin: (req, res, next) => {
+        let auth = req.session.auth;
+        if(auth !== undefined && auth === true)
+            next();
     }
 }

@@ -13,8 +13,8 @@ var MonitorRouter = require("./routers/monitor");
 initialize();
 
 const app = express();
+app.set('views', './views');
 app.set('view engine', 'ejs');
-app.set('views', 'views');
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(helmet.xssFilter());
@@ -35,7 +35,7 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    res.render('aaa', { username: "KuroNeko" });
+    res.render('layout', { path: 'main' });
 });
 
 app.use("/docker", DockerRouter);
